@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "expo": {
     "name": "funny_animals",
     "slug": "funny_animals",
@@ -13,7 +14,10 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": ["audio"]
+      }
     },
     "android": {
       "adaptiveIcon": {

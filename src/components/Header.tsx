@@ -60,7 +60,7 @@ export const Header: React.FC<HeaderProps> = (props) => {
         ) : null}
         <View ref={ref} onLayout={handleLayout} className="flex-1">
           <Text
-            className=" text-black text-center font-semibold text-xl"
+            className=" text-white text-center font-semibold text-xl"
             numberOfLines={2}
             testID={props.testIDHeaderTitle}
           >

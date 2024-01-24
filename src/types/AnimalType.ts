@@ -4,5 +4,5 @@ export interface AnimalType {
   name: string;
   image: never;
   buttonColor: string;
-  soundPath: string;
+  sound: string;
 }

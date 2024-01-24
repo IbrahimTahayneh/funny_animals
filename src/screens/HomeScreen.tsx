@@ -11,10 +11,9 @@ import {
   FlatList,
 } from "react-native";
 import SharedController from "../utils/SharedController";
-import { Screen } from "../components";
+import { Screen, AnimalModal } from "../components";
 import { images } from "../assets";
 import { animals } from "../data";
-import { AnimalModal } from "../components/ShowDialog";
 import { Animal } from "../types";
 
 type Animal = Animal.AnimalType;
@@ -25,7 +24,7 @@ const HomeScreen: React.FC = () => {
   const [, setVictorColor] = useState<string>("");
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
-  console.log(selectedAnimal);
+
   useEffect(() => {
     void checkColor();
   }, []);
@@ -76,25 +75,24 @@ const HomeScreen: React.FC = () => {
       </TouchableOpacity>
     </>
   );
+
   const showModal = (animal: Animal) => {
     setSelectedAnimal(animal);
-    console.log("animal", animal);
     setModalVisible(true);
   };
 
   const closeModal = () => {
-    console.log("hello", modalVisible);
     setModalVisible(false);
   };
   return (
     <Screen
       style={{
-        backgroundColor,
+        backgroundColor: backgroundColor,
       }}
       withHeader
       headerTitle={"Funny Animals"}
       headerColor={backgroundColor}
-      headerLeftComponent={<Image source={images.Icon} className="mx-4" />}
+      headerLeftComponent={<Image source={images.Icon} className="mx-4 mb-1" />}
       headerRightComponent={<Image source={images.InfoIcon} className="mx-4" />}
     >
       <FlatList
@@ -103,9 +101,15 @@ const HomeScreen: React.FC = () => {
         renderItem={renderItem}
         keyExtractor={(_item, index) => index.toString()}
         contentContainerStyle={styles.gridViewContainer}
+        showsVerticalScrollIndicator={false}
       />
       {selectedAnimal && modalVisible && (
-        <AnimalModal animal={selectedAnimal} onClose={() => closeModal()} />
+        <AnimalModal
+          isVisable={modalVisible}
+          animal={selectedAnimal}
+          backgroundColor={backgroundColor}
+          onClose={closeModal}
+        />
       )}
     </Screen>
   );
@@ -133,6 +137,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     borderRadius: 10,
+    backgroundColor: "transparent",
   },
   buttonTextt: {
     fontSize: 24,

@@ -3,3 +3,4 @@ export * from "./Header";
 export * from "./Loading";
 export * from "./Screen";
 export * from "./Image";
+export * from "./AnimalModal";

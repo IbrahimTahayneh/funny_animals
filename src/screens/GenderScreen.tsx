@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import SharedController from "../utils/SharedController";
 import { CustomGender } from "../components/CustomeGender";
 import Female from "../assets/images/Female";
@@ -12,7 +13,11 @@ import VictorThree from "../assets/images/VictorThree";
 import VictorFour from "../assets/images/VictorFour";
 import BackgroundButton from "../assets/images/BackgroundButton";
 
-const GenderScreen: React.FC = () => {
+const GenderScreen = ({
+  navigation,
+}: {
+  navigation: NavigationProp<ParamListBase>;
+}) => {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleGenderSelection = (index: number) => {
@@ -23,10 +28,15 @@ const GenderScreen: React.FC = () => {
     const selectedGender = selectedIndex === 0 ? "Female" : "Male";
     await SharedController.saveGender(selectedGender);
     await SharedController.isSelectedGender(true);
+    navigation.navigate("HomeScreen");
   };
 
   return (
-    <Screen className="flex-1 items-center justify-center">
+    <Screen
+      withHeader={false}
+      className="flex-1 items-center justify-center"
+      barStyle="dark-content"
+    >
       <Text className="text-3xl py-10">Choose your gender</Text>
       <CustomGender
         isSelected={selectedIndex === 0}
@@ -43,7 +53,7 @@ const GenderScreen: React.FC = () => {
       />
       <Text className="text-3xl py-7">Male</Text>
       <TouchableOpacity onPress={handleContinue}>
-        <View className=" h-[66] w-[308] rounded-xl bg-white items-center justify-center  relative">
+        <View className=" h-[66] w-[308] rounded-xl items-center justify-center  relative">
           <BackgroundButton />
           <VictorOne />
           <VictorTwo />

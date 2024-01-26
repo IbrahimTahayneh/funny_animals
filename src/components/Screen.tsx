@@ -48,8 +48,8 @@ export const Screen = React.memo<ScreenProps>(
             testIDHeaderTitle={rest.testIDHeaderTitle}
             testIDLeftImg={rest.testIDLeftImg}
             testIDRightImg={rest.testIDRightImg}
-            isLeftComponentExist={true}
-            isRightComponentExist={true}
+            // isLeftComponentExist={true}
+            // isRightComponentExist={true}
           />
         ) : null}
         {rest.children}
